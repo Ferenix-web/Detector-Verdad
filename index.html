@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detector de Verdad o Mentira</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #111827, #1f2937);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      text-align: center;
+    }button {
+  padding: 16px 32px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: #2563eb;
+  color: white;
+  transition: transform 0.2s;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+#resultado {
+  margin-top: 30px;
+  font-size: 2rem;
+  font-weight: bold;
+  min-height: 50px;
+}
+
+#hint {
+  position: fixed;
+  bottom: 4px;
+  right: 4px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.35);
+  display: none;
+}
+
+  </style>
+</head>
+<body>
+  <h1>Detector de Verdades y Mentiras</h1>
+  <button onclick="detectar()">Analizar</button>
+  <div id="resultado"></div>
+  <div id="hint"></div>  <script>
+    function detectar() {
+      const resultado = document.getElementById('resultado');
+      const hint = document.getElementById('hint');
+
+      resultado.textContent = 'Analizando...';
+      hint.style.display = 'none';
+
+      const esVerdad = Math.random() < 0.5;
+
+      if (esVerdad) {
+        hint.style.display = 'block';
+      }
+
+      setTimeout(() => {
+        resultado.textContent = esVerdad ? '✅ VERDADERO' : '❌ FALSO';
+      }, 1800);
+    }
+  </script></body>
+</html>
