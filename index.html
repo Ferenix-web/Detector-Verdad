@@ -55,14 +55,15 @@ button:hover {
   <button onclick="detectar()">Analizar</button>
   <div id="resultado"></div>
   <div id="hint"></div>  <script>
-    const esVerdad = Math.random() < 0.5;
+    let esVerdad = Math.random() < 0.5;
 
-    // Mostrar pista antes de pulsar analizar
-    window.onload = () => {
+    function actualizarIndicador() {
       const hint = document.getElementById('hint');
-      if (esVerdad) {
-        hint.style.display = 'block';
-      }
+      hint.style.display = esVerdad ? 'block' : 'none';
+    }
+
+    window.onload = () => {
+      actualizarIndicador();
     };
 
     function detectar() {
@@ -72,6 +73,10 @@ button:hover {
 
       setTimeout(() => {
         resultado.textContent = esVerdad ? '✅ VERDADERO' : '❌ FALSO';
+
+        // Preparar siguiente resultado para la próxima vez
+        esVerdad = Math.random() < 0.5;
+        actualizarIndicador();
       }, 1800);
     }
   </script></body>
