@@ -39,10 +39,10 @@ button:hover {
 
 #hint {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 6px;
-  height: 6px;
+  bottom: 4px;
+  right: 4px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   background: rgba(255,255,255,0.35);
   display: none;
@@ -55,29 +55,29 @@ button:hover {
   <button onclick="detectar()">Analizar</button>
   <div id="resultado"></div>
   <div id="hint"></div>  <script>
-    let esVerdad = Math.random() < 0.5;
+    let esVerdad = false;
 
-    function actualizarIndicador() {
+    function generarNuevoResultado() {
+      esVerdad = Math.random() < 0.5;
       const hint = document.getElementById('hint');
       hint.style.display = esVerdad ? 'block' : 'none';
     }
 
-    window.onload = () => {
-      actualizarIndicador();
-    };
-
     function detectar() {
       const resultado = document.getElementById('resultado');
-
       resultado.textContent = 'Analizando...';
 
       setTimeout(() => {
         resultado.textContent = esVerdad ? '✅ VERDADERO' : '❌ FALSO';
 
-        // Preparar siguiente resultado para la próxima vez
-        esVerdad = Math.random() < 0.5;
-        actualizarIndicador();
+        // Tras mostrar resultado, preparar automáticamente el siguiente
+        setTimeout(() => {
+          resultado.textContent = '';
+          generarNuevoResultado();
+        }, 1200);
       }, 1800);
     }
+
+    window.onload = generarNuevoResultado;
   </script></body>
 </html>
